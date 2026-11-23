@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday ✨ Sunlit Shore Keepsake</title>
+
+  <!-- Google Fonts Only: Playfair Display, Plus Jakarta Sans & Noto Serif SC for Chinese characters -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Serif+SC:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================================
+       COASTAL SUNLIT PEARL DESIGN SYSTEM (Self-Contained CSS)
+       ========================================================================= */
+    :root {
+      --cream: #F7FAFC;
+      --sand: #E2F1F8;
+      --pearl: #FFFDF9;
+      --charcoal: #1E293B;
+      --muted: #526071;
+      --coral: #E07A5F;
+      --coral-dark: #C96449;
+      --seafoam: #A8CCD9;
+      --seafoam-dark: #789DAA;
+      --gold: #D4A373;
+      --gold-light: #E9C46A;
+      --shadow-soft: 0 14px 36px -10px rgba(30, 41, 59, 0.09);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        linear-gradient(128deg, rgba(226, 241, 248, 0.72) 0%, rgba(247, 250, 252, 0.92) 48%, rgba(255, 253, 249, 0.96) 100%),
+        radial-gradient(circle at 82% 18%, rgba(224, 122, 95, 0.12), transparent 55%),
+        var(--cream);
+      color: var(--charcoal);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .font-serif {
+      font-family: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
+    }
+
+    .zh-text {
+      font-family: 'Noto Serif SC', 'Cormorant Garamond', serif;
+    }
+
+    /* Ambient floating pearls */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.45; }
+      50% { transform: translateY(-18px) translateX(8px); opacity: 0.92; }
+    }
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      border-radius: 50%;
+      animation: floatSlow 7s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    /* Custom Confetti Canvas */
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 90;
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: rgba(255, 253, 249, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(212, 163, 115, 0.32);
+      box-shadow: var(--shadow-soft);
+      border-radius: var(--radius-lg);
+    }
+
+    /* =========================================================================
+       1. FULL-SCREEN FROSTED GLASS BIRTHDAY LOCK SCREEN
+       ========================================================================= */
+    #lockScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255, 248, 231, 0.92), rgba(242, 236, 225, 0.88)),
+        rgba(250, 247, 242, 0.85);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease, visibility 0.65s ease;
+    }
+
+    #lockScreen.unlocked {
+      opacity: 0;
+      transform: scale(1.04);
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .lock-card {
+      width: 100%;
+      max-width: 390px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background: rgba(255, 253, 249, 0.92);
+      border: 1px solid rgba(212, 163, 115, 0.4);
+      border-radius: 32px;
+      box-shadow: 0 24px 60px -15px rgba(30, 41, 59, 0.16);
+    }
+
+    @keyframes shakeHorizontal {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-9px); }
+      40% { transform: translateX(9px); }
+      60% { transform: translateX(-6px); }
+      80% { transform: translateX(6px); }
+    }
+    .shake {
+      animation: shakeHorizontal 0.42s ease;
+    }
+
+    .pin-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin: 1.25rem 0 0.65rem;
+    }
+
+    .pin-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: transparent;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .pin-dot.filled {
+      background: var(--coral);
+      border-color: var(--coral);
+      transform: scale(1.18);
+      box-shadow: 0 0 10px rgba(224, 122, 95, 0.45);
+    }
+
+    .keypad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+      max-width: 270px;
+      margin: 1.25rem auto 0;
+    }
+
+    .key-btn {
+      height: 56px;
+      border-radius: 18px;
+      border: 1px solid rgba(212, 163, 115, 0.32);
+      background: var(--pearl);
+      color: var(--charcoal);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.12s ease, background-color 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .key-btn:hover {
+      background: var(--sand);
+      border-color: var(--gold);
+    }
+
+    .key-btn:active {
+      transform: scale(0.93);
+      background: rgba(224, 122, 95, 0.14);
+    }
+
+    .key-btn.action-key {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: rgba(242, 236, 225, 0.65);
+    }
+
+    .key-btn.unlock-key {
+      background: var(--coral);
+      color: #FFFDF9;
+      border-color: var(--coral);
+      font-size: 0.9rem;
+    }
+
+    .key-btn.unlock-key:hover {
+      background: var(--coral-dark);
+    }
+
+    /* =========================================================================
+       LAYOUT & TOP CONTROLS
+       ========================================================================= */
+    .top-bar {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 40;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 163, 115, 0.38);
+      background: rgba(255, 253, 249, 0.88);
+      backdrop-filter: blur(10px);
+      color: var(--charcoal);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(30, 41, 59, 0.06);
+      transition: all 0.2s ease;
+    }
+
+    .pill-btn:hover {
+      border-color: var(--coral);
+      transform: translateY(-1px);
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 4.5rem 1.15rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+    }
+
+    .hero-header {
+      text-align: center;
+      padding-top: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.95rem;
+      border-radius: 999px;
+      background: rgba(129, 178, 154, 0.16);
+      border: 1px solid rgba(129, 178, 154, 0.35);
+      color: var(--charcoal);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 5.5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-title span {
+      color: var(--coral);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      max-width: 560px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .section-card {
+      padding: 2.25rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .section-card {
+        padding: 3rem 2.75rem;
+      }
+    }
+
+    .section-eyebrow {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.65rem, 3.8vw, 2.35rem);
+      font-weight: 700;
+      line-height: 1.22;
+      margin-bottom: 0.65rem;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 540px;
+      margin: 0 auto 1.75rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.55rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--coral);
+      color: #FFFDF9;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 22px -6px rgba(224, 122, 95, 0.5);
+      transition: transform 0.15s ease, background-color 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--coral-dark);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.96);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.82rem 1.35rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 163, 115, 0.45);
+      background: var(--sand);
+      color: var(--charcoal);
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(212, 163, 115, 0.22);
+    }
+
+    /* =========================================================================
+       2. INTERACTIVE BIRTHDAY CAKE
+       ========================================================================= */
+    @keyframes flicker {
+      0%, 100% { transform: scale(1) rotate(-2deg); opacity: 1; }
+      35% { transform: scale(1.08, 0.94) rotate(2deg); opacity: 0.92; }
+      70% { transform: scale(0.95, 1.06) rotate(-1deg); opacity: 0.98; }
+    }
+    .flame {
+      transform-origin: bottom center;
+      animation: flicker 1.1s infinite ease-in-out;
+    }
+    .flame-out {
+      opacity: 0 !important;
+      transform: scale(0) !important;
+      transition: all 0.35s ease-out;
+      animation: none !important;
+    }
+    @keyframes smokeRise {
+      0% { opacity: 0.75; transform: translateY(0) scale(0.6); }
+      100% { opacity: 0; transform: translateY(-34px) scale(1.85); }
+    }
+    .smoke-puff {
+      animation: smokeRise 1.6s ease-out forwards;
+    }
+
+    .cake-wrap {
+      max-width: 290px;
+      margin: 0.5rem auto 1.5rem;
+      user-select: none;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+    }
+
+    /* =========================================================================
+       3. WAX-SEALED ENVELOPE: 贝壳的温柔 & 螺髻
+       ========================================================================= */
+    .sunbeam-overlay {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%) rotate(11deg);
+      width: 360px;
+      height: 145%;
+      background: linear-gradient(180deg, rgba(255, 246, 214, 0.78) 0%, rgba(255, 248, 228, 0.35) 55%, transparent 100%);
+      filter: blur(10px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .envelope-stage {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .sealed-cover {
+      background: linear-gradient(145deg, #FFFDF9 0%, #F4ECE0 100%);
+      border: 1.5px solid rgba(212, 163, 115, 0.5);
+      border-radius: 24px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 18px 40px -12px rgba(30, 41, 59, 0.12);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+    }
+
+    .sealed-cover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px -12px rgba(224, 122, 95, 0.22);
+    }
+
+    .wax-seal {
+      width: 74px;
+      height: 74px;
+      margin: 0 auto 1.1rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 30%, #E88D74, #C85A3F);
+      border: 3px solid rgba(255, 245, 235, 0.55);
+      box-shadow: 0 8px 20px rgba(200, 90, 63, 0.38), inset 0 2px 6px rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFDF9;
+      transition: transform 0.35s ease;
+    }
+
+    .sealed-cover:hover .wax-seal {
+      transform: scale(1.08) rotate(-6deg);
+    }
+
+    .unfolded-letter {
+      display: none;
+      background: var(--pearl);
+      border: 1px solid rgba(212, 163, 115, 0.42);
+      border-radius: 24px;
+      padding: 2rem 1.4rem;
+      box-shadow: 0 16px 38px -10px rgba(30, 41, 59, 0.1);
+      animation: unfoldReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @media (min-width: 640px) {
+      .unfolded-letter {
+        padding: 2.5rem 2.25rem;
+      }
+    }
+
+    @keyframes unfoldReveal {
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .shells-trio {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+
+    .shell-btn {
+      background: rgba(250, 247, 242, 0.9);
+      border: 1.5px solid rgba(212, 163, 115, 0.32);
+      border-radius: 20px;
+      padding: 0.95rem 0.5rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+
+    .shell-btn:hover, .shell-btn.active {
+      border-color: var(--coral);
+      background: #FFFDF9;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 22px -8px rgba(224, 122, 95, 0.28);
+    }
+
+    .shell-detail-box {
+      background: linear-gradient(135deg, rgba(250, 247, 242, 0.95), rgba(242, 236, 225, 0.7));
+      border-left: 4px solid var(--coral);
+      border-radius: 14px;
+      padding: 1.15rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .letter-prose {
+      font-size: 0.98rem;
+      color: var(--charcoal);
+      line-height: 1.8;
+      white-space: pre-line;
+      border-top: 1px dashed rgba(212, 163, 115, 0.45);
+      padding-top: 1.35rem;
+    }
+
+    /* =========================================================================
+       4. GLOWING WISH JAR (FRIENDS' ORBS + SHARED COLLECTION)
+       ========================================================================= */
+    .jar-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .jar-layout {
+        grid-template-columns: 1fr 1.1fr;
+      }
+    }
+
+    .jar-stage {
+      position: relative;
+      width: 240px;
+      height: 300px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .jar-cork {
+      width: 118px;
+      height: 24px;
+      border-radius: 10px 10px 4px 4px;
+      background: linear-gradient(90deg, #C6925E, #E3B988, #B8834E);
+      border: 1px solid rgba(138, 92, 46, 0.4);
+      z-index: 3;
+      box-shadow: 0 4px 10px rgba(30, 41, 59, 0.12);
+    }
+
+    .jar-rim {
+      width: 142px;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255, 253, 249, 0.9);
+      border: 1.5px solid rgba(212, 163, 115, 0.55);
+      margin-top: -2px;
+      z-index: 3;
+    }
+
+    .jar-glass {
+      position: relative;
+      width: 224px;
+      height: 256px;
+      margin-top: -3px;
+      border-radius: 34px 34px 48px 48px;
+      background:
+        radial-gradient(circle at 50% 80%, rgba(253, 224, 71, 0.22), transparent 68%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 253, 249, 0.28) 45%, rgba(129, 178, 154, 0.16) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      box-shadow:
+        0 20px 45px -12px rgba(212, 163, 115, 0.35),
+        inset 0 0 28px rgba(255, 253, 249, 0.85);
+      overflow: hidden;
+    }
+
+    /* Glass reflection highlight */
+    .jar-glass::after {
+      content: "";
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 14px;
+      height: 165px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.05));
+      pointer-events: none;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(4px, -7px) scale(1.06); }
+      66% { transform: translate(-4px, -3px) scale(0.97); }
+    }
+
+    .wish-orb-btn {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      cursor: pointer;
+      animation: orbFloat 4.2s ease-in-out infinite;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+
+    .wish-orb-btn:hover, .wish-orb-btn.selected {
+      transform: scale(1.28) !important;
+      z-index: 10;
+    }
+
+    .wish-reader-card {
+      background: var(--pearl);
+      border: 1px solid rgba(212, 163, 115, 0.42);
+      border-radius: 22px;
+      padding: 1.5rem;
+      min-height: 175px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 10px 26px -10px rgba(30, 41, 59, 0.08);
+    }
+
+    .wish-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 0.72rem 0.95rem;
+      border-radius: 14px;
+      border: 1px solid rgba(212, 163, 115, 0.45);
+      background: var(--pearl);
+      color: var(--charcoal);
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--coral);
+    }
+
+    /* =========================================================================
+       ORGANIZER / COLLECT WISH MODAL
+       ========================================================================= */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      background: rgba(30, 41, 59, 0.48);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 460px;
+      background: var(--pearl);
+      border: 1px solid rgba(212, 163, 115, 0.45);
+      border-radius: 26px;
+      padding: 1.75rem;
+      box-shadow: 0 24px 60px rgba(30, 41, 59, 0.22);
+      position: relative;
+    }
+
+    .copy-box {
+      background: var(--sand);
+      border: 1px dashed var(--gold);
+      border-radius: 12px;
+      padding: 0.75rem;
+      font-size: 0.8rem;
+      word-break: break-all;
+      color: var(--charcoal);
+      margin: 0.75rem 0;
+    }
+
+    .friend-link-panel {
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 0.8rem;
+      border: 1px solid rgba(212, 163, 115, 0.38);
+      border-radius: 16px;
+      background: rgba(250, 247, 242, 0.82);
+    }
+
+    .friend-link-panel[hidden] {
+      display: none;
+    }
+
+    .friend-link-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.45rem;
+      margin-top: 0.5rem;
+    }
+
+    .friend-link-input {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @media (max-width: 520px) {
+      .friend-link-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .cinema-mood-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    @media (min-width: 680px) {
+      .cinema-mood-section {
+        grid-template-columns: 0.9fr 1.1fr;
+      }
+    }
+
+    .cinema-stub {
+      position: relative;
+      min-height: 190px;
+      padding: 1.35rem;
+      border: 1px solid rgba(30, 41, 59, 0.16);
+      border-radius: 18px;
+      background: rgba(255, 253, 249, 0.88);
+      box-shadow: 0 12px 28px rgba(30, 41, 59, 0.08);
+    }
+
+    .cinema-stub::after {
+      content: "";
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      bottom: 1.1rem;
+      border-right: 1px dashed rgba(30, 41, 59, 0.22);
+    }
+
+    .morning-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 190px;
+      padding: 1.35rem;
+      border: 1px solid rgba(120, 157, 170, 0.32);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(226, 241, 248, 0.9), rgba(255, 253, 249, 0.78));
+      transition: background 0.5s ease, border-color 0.5s ease;
+    }
+
+    body.sunset-cinema {
+      background:
+        linear-gradient(128deg, rgba(252, 226, 195, 0.58) 0%, rgba(233, 196, 166, 0.48) 48%, rgba(247, 250, 252, 0.96) 100%),
+        var(--cream);
+    }
+
+    body.sunset-cinema .morning-card {
+      border-color: rgba(224, 122, 95, 0.36);
+      background: linear-gradient(135deg, rgba(233, 196, 166, 0.72), rgba(255, 248, 228, 0.82));
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Confetti Canvas (Zero External Dependencies) -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Ambient Pearl Particles -->
+  <div id="particleLayer" aria-hidden="true"></div>
+
+  <!-- =========================================================================
+       1. BIRTHDAY LOCK SCREEN (PASSCODE KEYPAD)
+       ========================================================================= -->
+  <div id="lockScreen" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+    <div id="lockCard" class="lock-card">
+      <div style="font-size: 2.1rem; margin-bottom: 0.35rem;">🐚</div>
+      <span class="badge" style="margin-bottom: 0.65rem;">Private Keepsake</span>
+      <h1 id="lockTitle" class="font-serif" style="font-size: 1.65rem; font-weight: 700; margin-bottom: 0.35rem;">
+        For <span id="lockHerName">Her</span> Only
+      </h1>
+      <p id="lockClueText" style="font-size: 0.86rem; color: var(--muted);">
+        Enter your special day (MMDD) to unlock
+      </p>
+
+      <!-- Dynamic Passcode Dots -->
+      <div id="pinDots" class="pin-dots" aria-label="Passcode digits"></div>
+      <p id="lockFeedback" style="font-size: 0.8rem; min-height: 1.25rem; color: var(--coral); font-weight: 600;"></p>
+
+      <!-- Touch & Click Numeric Keypad -->
+      <div class="keypad-grid">
+        <button type="button" class="key-btn" data-digit="1">1</button>
+        <button type="button" class="key-btn" data-digit="2">2</button>
+        <button type="button" class="key-btn" data-digit="3">3</button>
+        <button type="button" class="key-btn" data-digit="4">4</button>
+        <button type="button" class="key-btn" data-digit="5">5</button>
+        <button type="button" class="key-btn" data-digit="6">6</button>
+        <button type="button" class="key-btn" data-digit="7">7</button>
+        <button type="button" class="key-btn" data-digit="8">8</button>
+        <button type="button" class="key-btn" data-digit="9">9</button>
+        <button type="button" class="key-btn action-key" id="clearPinBtn">Clear</button>
+        <button type="button" class="key-btn" data-digit="0">0</button>
+        <button type="button" class="key-btn unlock-key" id="submitPinBtn">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Quick Controls -->
+  <div class="top-bar">
+    <button type="button" class="pill-btn" id="chimeToggleBtn" aria-label="Toggle birthday chime">
+      <span id="chimeIcon">🔇</span>
+      <span id="chimeText">Chime Off</span>
+    </button>
+    <button type="button" class="pill-btn" id="celebrateBtn">
+      ✨ Confetti
+    </button>
+  </div>
+
+  <!-- =========================================================================
+       MAIN PAGE CONTENT
+       ========================================================================= -->
+  <main class="container">
+
+    <!-- Hero Header -->
+    <header class="hero-header">
+      <span class="badge">Sunlit Shore Birthday Edition</span>
+      <h2 class="hero-title font-serif">
+        Happy Birthday, <span id="heroHerName">Chloe</span> ✨
+      </h2>
+      <p id="heroSubtitle" class="hero-sub">
+        A small sunlit corner of the internet holding a wish-ready cake, three coastal shells, and glowing wishes from people who care about you.
+      </p>
+    </header>
+
+    <!-- =========================================================================
+         2. INTERACTIVE BIRTHDAY CAKE & CANDLE BLOW-OUT
+         ========================================================================= -->
+    <section class="glass-card section-card" style="text-align: center;">
+      <span class="section-eyebrow" style="color: var(--seafoam-dark);">01 • Make a Birthday Wish</span>
+      <h3 class="section-title font-serif">Blow Out the Candles</h3>
+      <p class="section-desc">
+        Close your eyes, make a wish for the year ahead, and tap the button—or enable your mic and blow gently toward your screen.
+      </p>
+
+      <div class="cake-wrap">
+        <svg viewBox="0 0 300 235" style="width: 100%; height: auto; overflow: visible;">
+          <!-- Porcelain Plate -->
+          <ellipse cx="150" cy="212" rx="124" ry="15" fill="#E6DEC8" />
+          <ellipse cx="150" cy="209" rx="114" ry="11" fill="#FFFDF9" />
+
+          <!-- Bottom Tier -->
+          <rect x="56" y="146" width="188" height="60" rx="16" fill="#F4D5B8" />
+          <path d="M56 160 Q79 174 103 160 T150 160 T197 160 T244 160 L244 146 Q244 138 228 138 L72 138 Q56 138 56 146 Z" fill="#FFFDF9" />
+          <circle cx="88" cy="180" r="3.5" fill="#E07A5F" />
+          <circle cx="122" cy="188" r="3.5" fill="#81B29A" />
+          <circle cx="154" cy="178" r="3.5" fill="#D4A373" />
+          <circle cx="188" cy="188" r="3.5" fill="#E07A5F" />
+          <circle cx="216" cy="179" r="3.5" fill="#81B29A" />
+
+          <!-- Top Tier -->
+          <rect x="86" y="94" width="128" height="52" rx="14" fill="#F9E5D2" />
+          <path d="M86 107 Q107 120 129 107 T171 107 T214 107 L214 94 Q214 86 200 86 L100 86 Q86 86 86 94 Z" fill="#E07A5F" opacity="0.88" />
+
+          <!-- Candle 1 -->
+          <g transform="translate(113, 46)">
+            <rect x="0" y="14" width="10" height="28" rx="4" fill="#81B29A" />
+            <line x1="5" y1="9" x2="5" y2="14" stroke="#1E293B" stroke-width="2" />
+            <path class="flame" d="M5 0 C9 6, 9 11, 5 11 C1 11, 1 6, 5 0 Z" fill="#F59E0B" />
+            <path class="flame" d="M5 3 C7 6, 7 10, 5 10 C3 10, 3 6, 5 3 Z" fill="#FEF08A" />
+            <g class="smoke-group"></g>
+          </g>
+
+          <!-- Candle 2 -->
+          <g transform="translate(145, 40)">
+            <rect x="0" y="14" width="10" height="34" rx="4" fill="#D4A373" />
+            <line x1="5" y1="9" x2="5" y2="14" stroke="#1E293B" stroke-width="2" />
+            <path class="flame" d="M5 0 C9 6, 9 11, 5 11 C1 11, 1 6, 5 0 Z" fill="#F59E0B" />
+            <path class="flame" d="M5 3 C7 6, 7 10, 5 10 C3 10, 3 6, 5 3 Z" fill="#FEF08A" />
+            <g class="smoke-group"></g>
+          </g>
+
+          <!-- Candle 3 -->
+          <g transform="translate(177, 46)">
+            <rect x="0" y="14" width="10" height="28" rx="4" fill="#E07A5F" />
+            <line x1="5" y1="9" x2="5" y2="14" stroke="#1E293B" stroke-width="2" />
+            <path class="flame" d="M5 0 C9 6, 9 11, 5 11 C1 11, 1 6, 5 0 Z" fill="#F59E0B" />
+            <path class="flame" d="M5 3 C7 6, 7 10, 5 10 C3 10, 3 6, 5 3 Z" fill="#FEF08A" />
+            <g class="smoke-group"></g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-primary" id="blowCandlesBtn">
+          🌬️ Make a Wish &amp; Blow Out Candles
+        </button>
+        <button type="button" class="btn-secondary" id="micBlowBtn">
+          🎙️ Blow via Mic
+        </button>
+        <button type="button" class="btn-secondary hidden" id="relightBtn">
+          🕯️ Relight Candles
+        </button>
+      </div>
+      <p id="cakeStatus" style="margin-top: 0.9rem; font-size: 0.88rem; font-weight: 600; color: var(--coral); min-height: 1.35rem;"></p>
+    </section>
+
+    <!-- =========================================================================
+         3. SPECIAL ENVELOPE: '贝壳的温柔' & '螺髻'
+         ========================================================================= -->
+    <section class="glass-card section-card">
+      <div class="sunbeam-overlay" aria-hidden="true"></div>
+
+      <div style="text-align: center; position: relative; z-index: 2;">
+        <span class="section-eyebrow" style="color: var(--gold);">02 • Sunlit Shore Keepsake</span>
+        <h3 class="section-title font-serif">
+          <span class="zh-text">贝壳的温柔</span> &amp; <span class="zh-text">螺髻</span>
+        </h3>
+        <p class="section-desc">
+          A sealed coastal note about the three shells I brought back from my trip—and why they reminded me of you.
+        </p>
+      </div>
+
+      <div class="envelope-stage">
+        <!-- Sealed Envelope Front -->
+        <div id="sealedEnvelopeCover" class="sealed-cover" role="button" tabindex="0" aria-label="Tap wax seal to open shell letter">
+          <div class="wax-seal">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3C7.5 3 4 6.8 4 11.2c0 3.7 2.5 6.8 6 7.6V21h4v-2.2c3.5-.8 6-3.9 6-7.6C20 6.8 16.5 3 12 3z" />
+              <path stroke-linecap="round" d="M12 3v15M8.5 5.2L10.5 18M15.5 5.2L13.5 18" />
+            </svg>
+          </div>
+          <p class="font-serif" style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.3rem;">
+            Tap the Wax Seal to Unfold
+          </p>
+          <p style="font-size: 0.85rem; color: var(--muted);">
+            <span class="zh-text">“贝壳的温柔”</span> • <span class="zh-text">“螺髻”</span> • &amp; My Note For You
+          </p>
+        </div>
+
+        <!-- Unfolded Letter Content -->
+        <div id="unfoldedShellLetter" class="unfolded-letter">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral);">
+              Collected From the Coast
+            </span>
+            <span class="zh-text" style="font-size: 0.9rem; color: var(--gold); font-weight: 600;">
+              海风与贝壳
+            </span>
+          </div>
+
+          <h4 class="font-serif" style="font-size: 1.45rem; font-weight: 700; margin-bottom: 0.35rem;">
+            Tap Each Shell to Read Its Meaning
+          </h4>
+          <p style="font-size: 0.86rem; color: var(--muted);">
+            Three treasures resting in a beam of afternoon sunlight:
+          </p>
+
+          <!-- Interactive 3-Shell Cards -->
+          <div class="shells-trio">
+            <!-- Shell 1: Smooth Cream Snail Shell -->
+            <button type="button" class="shell-btn active" data-shell-idx="0">
+              <svg width="64" height="64" viewBox="0 0 140 140">
+                <defs>
+                  <radialGradient id="gCream" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#FFFDF9" />
+                    <stop offset="60%" stop-color="#F3E5C8" />
+                    <stop offset="100%" stop-color="#C8A97E" />
+                  </radialGradient>
+                </defs>
+                <path d="M36 52 C28 66, 32 94, 56 106 C80 118, 108 104, 114 84 C118 70, 104 52, 86 44 C70 37, 54 36, 44 42 L26 36 L34 49 Z"
+                  fill="url(#gCream)" stroke="#B89668" stroke-width="2" />
+                <path d="M36 48 Q46 42 54 50" fill="none" stroke="#B89668" stroke-width="1.8" />
+              </svg>
+              <span class="zh-text" style="font-size: 0.85rem; font-weight: 700; margin-top: 0.25rem;">贝壳的温柔</span>
+              <span style="font-size: 0.72rem; color: var(--muted);">Smooth Shell</span>
+            </button>
+
+            <!-- Shell 2: Spiral Turret Shell (螺髻) -->
+            <button type="button" class="shell-btn" data-shell-idx="1">
+              <svg width="68" height="64" viewBox="0 0 160 140">
+                <defs>
+                  <linearGradient id="gTurret" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#E8DCD0" />
+                    <stop offset="55%" stop-color="#C9B3A3" />
+                    <stop offset="100%" stop-color="#8F7668" />
+                  </linearGradient>
+                </defs>
+                <g transform="rotate(-14 80 70)">
+                  <path d="M18 72 C18 60, 32 54, 46 58 L142 71 L46 84 C32 88, 18 82, 18 72 Z"
+                    fill="url(#gTurret)" stroke="#7D6457" stroke-width="2" />
+                  <path d="M46 58 Q52 71 46 84 M66 60 Q72 71 66 82 M86 63 Q91 71 86 79 M106 65 Q110 71 106 77"
+                    fill="none" stroke="#6E5548" stroke-width="1.8" />
+                </g>
+              </svg>
+              <span class="zh-text" style="font-size: 0.85rem; font-weight: 700; margin-top: 0.25rem;">螺髻 (Luójì)</span>
+              <span style="font-size: 0.72rem; color: var(--muted);">Spiral Shell</span>
+            </button>
+
+            <!-- Shell 3: Sea Urchin Test -->
+            <button type="button" class="shell-btn" data-shell-idx="2">
+              <svg width="64" height="64" viewBox="0 0 140 140">
+                <defs>
+                  <radialGradient id="gUrchin" cx="42%" cy="38%" r="60%">
+                    <stop offset="0%" stop-color="#FFFDF9" />
+                    <stop offset="65%" stop-color="#DDD2C0" />
+                    <stop offset="100%" stop-color="#9E8F7B" />
+                  </radialGradient>
+                </defs>
+                <circle cx="70" cy="70" r="46" fill="url(#gUrchin)" stroke="#8C7D6B" stroke-width="2" />
+                <g fill="#FFFDF9" stroke="#7A6B59" stroke-width="1">
+                  <circle cx="70" cy="46" r="3" /><circle cx="93" cy="63" r="3" />
+                  <circle cx="84" cy="90" r="3" /><circle cx="56" cy="90" r="3" />
+                  <circle cx="47" cy="63" r="3" /><circle cx="70" cy="33" r="3.2" />
+                  <circle cx="104" cy="59" r="3.2" /><circle cx="91" cy="99" r="3.2" />
+                  <circle cx="49" cy="99" r="3.2" /><circle cx="36" cy="59" r="3.2" />
+                </g>
+                <circle cx="70" cy="70" r="9" fill="#6E5D4F" />
+              </svg>
+              <span class="zh-text" style="font-size: 0.85rem; font-weight: 700; margin-top: 0.25rem;">海胆壳</span>
+              <span style="font-size: 0.72rem; color: var(--muted);">Urchin Mosaic</span>
+            </button>
+          </div>
+
+          <!-- Selected Shell Symbolism Box -->
+          <div class="shell-detail-box">
+            <h5 id="shellCardTitle" class="font-serif" style="font-size: 1.05rem; font-weight: 700; color: var(--coral); margin-bottom: 0.3rem;"></h5>
+            <p id="shellCardText" style="font-size: 0.9rem; color: var(--charcoal); line-height: 1.65;"></p>
+          </div>
+
+          <!-- Main Personal Letter -->
+          <div id="shellLetterBody" class="letter-prose font-serif"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. CINEMA TICKET & MORNING BALCONY MOOD
+         ========================================================================= -->
+    <section class="glass-card section-card">
+      <div style="text-align: center;">
+        <span class="section-eyebrow" style="color: var(--coral);">04 • Quiet Cinema Moment</span>
+        <h3 class="section-title font-serif">A Film, a Balcony, a Little Breeze</h3>
+      </div>
+      <div class="cinema-mood-section">
+        <article class="cinema-stub" aria-label="Vintage cinema ticket">
+          <p style="font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);">Fresh Morning Pictures</p>
+          <h4 class="font-serif" style="font-size: 1.55rem; margin: 0.45rem 0 0.25rem;">One Movie, Zero Spoilers</h4>
+          <p style="font-size: 0.82rem; color: var(--muted);">A quiet, atmospheric side note.</p>
+          <p class="font-serif" style="margin-top: 1.35rem; font-size: 1.25rem;">Seat <span id="cinemaSeatNumber">Age</span></p>
+        </article>
+        <article class="morning-card">
+          <div>
+            <p style="font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--seafoam-dark);">Morning Balcony</p>
+            <h4 id="moodTitle" class="font-serif" style="font-size: 1.45rem; margin-top: 0.35rem;">Crisp Morning Sky</h4>
+            <p id="moodDescription" style="font-size: 0.86rem; color: var(--muted); margin-top: 0.35rem;">Coffee, ocean air, and pale sea-glass light.</p>
+          </div>
+          <button type="button" id="moodToggleBtn" class="btn-secondary" style="align-self: flex-start; margin-top: 1rem;">
+            🌅 Switch to Golden Sunset
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. LOVELY GLOWING WISH JAR (SHARED FRIEND WISHES)
+         ========================================================================= -->
+    <section class="glass-card section-card">
+      <div style="text-align: center;">
+        <span class="section-eyebrow" style="color: var(--seafoam-dark);">03 • Collected Warmth</span>
+        <h3 class="section-title font-serif">The Glowing Wish Jar</h3>
+        <p class="section-desc">
+          Each luminous orb inside holds a birthday wish sent in for you. Tap any glowing light to read who left it—or drop your own secret wish inside.
+        </p>
+      </div>
+
+      <div class="jar-layout">
+        <!-- Left: Glowing Glass Jar with Floating Firefly/Pearl Orbs -->
+        <div style="text-align: center;">
+          <div class="jar-stage">
+            <div class="jar-cork"></div>
+            <div class="jar-rim"></div>
+            <div id="wishJarGlass" class="jar-glass" aria-label="Glowing glass jar filled with birthday wishes">
+              <!-- Orbs injected dynamically by JS -->
+            </div>
+          </div>
+          <p id="jarCounterText" style="margin-top: 0.85rem; font-size: 0.82rem; font-weight: 600; color: var(--muted);">
+            0 glowing wishes inside
+          </p>
+        </div>
+
+        <!-- Right: Selected Wish Reader & Add Your Own Wish -->
+        <div>
+          <div class="wish-reader-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span id="wishBadge" class="badge" style="margin-bottom: 0;">✨ Tap an orb</span>
+                <span id="wishIndexTag" style="font-size: 0.78rem; color: var(--muted);"></span>
+              </div>
+              <p id="wishMessageDisplay" class="font-serif" style="font-size: 1.12rem; line-height: 1.6; color: var(--charcoal); margin-top: 0.5rem;">
+                Click any glowing pearl or firefly orb floating inside the jar to read the wish inside.
+              </p>
+            </div>
+            <p id="wishSenderDisplay" style="margin-top: 1rem; font-size: 0.86rem; font-weight: 700; color: var(--coral);">
+              — Friends &amp; Well-Wishers
+            </p>
+          </div>
+
+          <!-- Drop a Wish Directly into the Jar -->
+          <form id="addWishForm" class="wish-form">
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 0.5rem;">
+              <input id="wishAuthorInput" class="input-field" type="text" maxlength="28" placeholder="Your name" required />
+              <input id="wishTextInput" class="input-field" type="text" maxlength="160" placeholder="Write a birthday wish to drop in..." required />
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: space-between;">
+              <button type="submit" class="btn-primary" style="padding: 0.7rem 1.25rem; font-size: 0.85rem;">
+                ✨ Drop Orb Into Jar
+              </button>
+              <button type="button" id="copyFriendFormLinkBtn" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.78rem;">
+                💌 Copy Friend Wish Form Link
+              </button>
+            </div>
+            <div id="friendLinkPanel" class="friend-link-panel" hidden>
+              <p style="font-size: 0.78rem; color: var(--muted);">Friends can open this link to leave a birthday wish:</p>
+              <div class="friend-link-row">
+                <input id="friendFormLinkInput" class="input-field friend-link-input" type="text" readonly aria-label="Friend wish form link" />
+                <button type="button" id="copyFriendLinkAgainBtn" class="btn-secondary" style="padding: 0.62rem 0.85rem;">Copy</button>
+              </div>
+            </div>
+            <p id="wishSyncStatus" role="status" aria-live="polite" style="font-size: 0.82rem; color: var(--muted);"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       EASY-TO-CUSTOMIZE CONFIGURATION & SELF-CONTAINED JAVASCRIPT
+       ========================================================================= -->
+  <script src="wish-config.js"></script>
+  <script src="wishes.js"></script>
+  <script>
+    /**
+     * =========================================================================
+     *  CONFIG — EDIT EVERYTHING HERE IN ONE PLACE!
+     * =========================================================================
+     */
+    const CONFIG = {
+      herName: "Chloe", // <-- Replace with her name or nickname
+      yourName: "Alex", // <-- Replace with your name
+
+      // Birthday Passcode for the Lock Screen (4 to 8 digits, e.g. "0303" for March 3 or "03032008")
+      birthdayPasscode: "0303",
+      lockClue: "The day the tide brought someone rare.",
+
+      heroSubtitle:
+        "I put together a small sunlit corner just for you—with a wish-ready cake, the story behind the coastal shells from my trip, and a glowing jar of wishes from people who care about you.",
+
+      // 3 Shells inside the '贝壳的温柔 & 螺髻' envelope
+      shells: [
+        {
+          title: "贝壳的温柔 — Quiet Strength & Inner Gentleness",
+          text: "In Chinese literary imagery, a seashell (贝壳) symbolizes someone who carries calm, composed strength on the outside against the ocean waves, while holding rare warmth, sincerity, and a gentle heart within."
+        },
+        {
+          title: "螺髻 (Luójì) — Classic Poetic Grace",
+          text: "Classical Chinese poetry admired slender spiral shells (螺) for their natural geometric coils—comparing their delicate silhouette to '螺髻' (luójì), a timeless metaphor for effortless grace and beauty."
+        },
+        {
+          title: "海胆壳 — Five-Fold Symmetry & Rare Charm",
+          text: "Beneath a sea urchin's exterior lies a delicate, intricate five-fold geometric mosaic. Fragile, luminous in sunlight, and completely one of a kind."
+        }
+      ],
+
+      // The personal letter inside the '贝壳的温柔 & 螺髻' envelope
+      shellEnvelopeLetter: `Happy Birthday, Chloe,\n\nWhen I was on my trip by the sea, I came across these three shells resting in the sunlight and immediately thought of bringing them back for you.\n\nIn Chinese literature, people often speak of “贝壳的温柔” — the gentleness of a shell: poised and calm on the outside, yet soft, sincere, and precious within. And the spiral shell reminded me of “螺髻” (luójì), an old poetic image celebrating quiet, natural grace.\n\nJust handle the little sea urchin shell gently—it’s delicate, just like good memories worth keeping safe. Wishing you a year filled with calm tides, bright mornings, and every happiness you deserve.\n\n— Alex`,
+
+      // Pre-loaded wishes collected from friends/family via chat beforehand!
+      // Simply paste more { sender: "Name", message: "Wish..." } entries here.
+      FRIENDS_WISHES: [
+        {
+          sender: "May",
+          message: "Happy Birthday! Wishing you endless laughter, good coffee, and a year where everything falls smoothly into place."
+        },
+        {
+          sender: "Su Su",
+          message: "To the sweetest soul—may your days always be as bright and warm as afternoon sunlight by the beach!"
+        },
+        {
+          sender: "Ko Thiha",
+          message: "Happy Birthday! Hope this new chapter brings exciting trips, peace of mind, and lots of reasons to celebrate."
+        },
+        {
+          sender: "Lin Lin",
+          message: "Sending you the biggest birthday hug! Keep shining effortlessly just the way you always do."
+        },
+        {
+          sender: "Alex",
+          message: "My personal wish for you: may you always feel genuinely appreciated, unhurried, and surrounded by warmth."
+        }
+      ]
+    };
+
+    /* =========================================================================
+       STATE & INITIALIZATION
+       ========================================================================= */
+    const STORAGE_KEY = "sunlit_shore_wishes_v1";
+    let allWishes = [];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Bind CONFIG names & text
+      document.getElementById("lockHerName").textContent = CONFIG.herName;
+      document.getElementById("lockClueText").textContent = CONFIG.lockClue;
+      document.getElementById("heroHerName").textContent = CONFIG.herName;
+      document.getElementById("heroSubtitle").textContent = CONFIG.heroSubtitle;
+      document.getElementById("shellLetterBody").textContent = CONFIG.shellEnvelopeLetter;
+
+      createAmbientPearls();
+      initConfettiEngine();
+      initAudioChime();
+      initLockScreen();
+      initCakeSection();
+      initShellEnvelope();
+      initCinemaMood();
+      initWishJar();
+    });
+
+    /* =========================================================================
+       AMBIENT FLOATING PEARLS
+       ========================================================================= */
+    function createAmbientPearls() {
+      const layer = document.getElementById("particleLayer");
+      for (let i = 0; i < 18; i++) {
+        const dot = document.createElement("div");
+        dot.className = "particle";
+        const size = Math.random() * 7 + 4;
+        dot.style.width = `${size}px`;
+        dot.style.height = `${size}px`;
+        dot.style.left = `${Math.random() * 100}vw`;
+        dot.style.top = `${Math.random() * 100}vh`;
+        dot.style.animationDelay = `${Math.random() * 6}s`;
+        dot.style.animationDuration = `${6 + Math.random() * 6}s`;
+        dot.style.background =
+          i % 2 === 0
+            ? "radial-gradient(circle, #FFFDF9 25%, rgba(212,163,115,0.45) 100%)"
+            : "radial-gradient(circle, #FFFDF9 30%, rgba(129,178,154,0.42) 100%)";
+        layer.appendChild(dot);
+      }
+    }
+
+    /* =========================================================================
+       SELF-CONTAINED CONFETTI PARTICLE ENGINE (NO EXTERNAL LIB)
+       ========================================================================= */
+    let confettiParticles = [];
+    let confettiAnimId = null;
+
+    function initConfettiEngine() {
+      const canvas = document.getElementById("confettiCanvas");
+      const resize = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      };
+      resize();
+      window.addEventListener("resize", resize);
+
+      document.getElementById("celebrateBtn").addEventListener("click", launchConfetti);
+    }
+
+    function launchConfetti() {
+      const canvas = document.getElementById("confettiCanvas");
+      const ctx = canvas.getContext("2d");
+      const palette = ["#E07A5F", "#81B29A", "#D4A373", "#E9C46A", "#F4D5B8", "#FFFDF9"];
+
+      for (let i = 0; i < 95; i++) {
+        const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.4;
+        const speed = 7 + Math.random() * 10;
+        confettiParticles.push({
+          x: canvas.width * (0.25 + Math.random() * 0.5),
+          y: canvas.height * 0.62,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 2,
+          size: 5 + Math.random() * 6,
+          color: palette[i % palette.length],
+          rotation: Math.random() * Math.PI * 2,
+          vRot: (Math.random() - 0.5) * 0.2,
+          life: 1
+        });
+      }
+
+      if (!confettiAnimId) {
+        const render = () => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          confettiParticles.forEach((p) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.26; // gravity
+            p.vx *= 0.99;
+            p.rotation += p.vRot;
+            p.life -= 0.011;
+
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, p.life);
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * 0.65);
+            ctx.restore();
+          });
+
+          confettiParticles = confettiParticles.filter((p) => p.life > 0 && p.y < canvas.height + 30);
+          if (confettiParticles.length > 0) {
+            confettiAnimId = requestAnimationFrame(render);
+          } else {
+            confettiAnimId = null;
+          }
+        };
+        confettiAnimId = requestAnimationFrame(render);
+      }
+    }
+
+    /* =========================================================================
+       WEB AUDIO MUSIC-BOX BIRTHDAY CHIME
+       ========================================================================= */
+    let audioCtx = null;
+    let chimeOn = false;
+
+    function initAudioChime() {
+      const btn = document.getElementById("chimeToggleBtn");
+      btn.addEventListener("click", () => {
+        chimeOn = !chimeOn;
+        updateChimeUI();
+        if (chimeOn) playMusicBoxMelody();
+      });
+    }
+
+    function updateChimeUI() {
+      document.getElementById("chimeIcon").textContent = chimeOn ? "🔔" : "🔇";
+      document.getElementById("chimeText").textContent = chimeOn ? "Chime On" : "Chime Off";
+    }
+
+    function playMusicBoxMelody() {
+      if (!chimeOn) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === "suspended") audioCtx.resume();
+
+        const melody = [
+          [261.63, 0.3], [261.63, 0.2], [293.66, 0.5], [261.63, 0.5], [349.23, 0.5], [329.63, 0.85],
+          [261.63, 0.3], [261.63, 0.2], [293.66, 0.5], [261.63, 0.5], [392.00, 0.5], [349.23, 0.85],
+          [261.63, 0.3], [261.63, 0.2], [523.25, 0.5], [440.00, 0.5], [349.23, 0.5], [329.63, 0.5], [293.66, 0.85],
+          [466.16, 0.3], [466.16, 0.2], [440.00, 0.5], [349.23, 0.5], [392.00, 0.5], [349.23, 0.95]
+        ];
+
+        let t = audioCtx.currentTime + 0.05;
+        melody.forEach(([freq, dur]) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(freq, t);
+          gain.gain.setValueAtTime(0.001, t);
+          gain.gain.exponentialRampToValueAtTime(0.075, t + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(t);
+          osc.stop(t + dur + 0.02);
+          t += dur + 0.05;
+        });
+      } catch (e) {
+        // Ignore if browser blocks audio
+      }
+    }
+
+    /* =========================================================================
+       1. BIRTHDAY LOCK SCREEN LOGIC
+       ========================================================================= */
+    function initLockScreen() {
+      const targetCode = String(CONFIG.birthdayPasscode).trim();
+      const maxLen = targetCode.length;
+      const dotsContainer = document.getElementById("pinDots");
+      const feedback = document.getElementById("lockFeedback");
+      const lockCard = document.getElementById("lockCard");
+      const lockScreen = document.getElementById("lockScreen");
+      let entered = "";
+
+      // Create dots matching passcode length
+      for (let i = 0; i < maxLen; i++) {
+        const dot = document.createElement("span");
+        dot.className = "pin-dot";
+        dotsContainer.appendChild(dot);
+      }
+
+      const dots = dotsContainer.querySelectorAll(".pin-dot");
+
+      function syncDots() {
+        dots.forEach((d, idx) => {
+          d.classList.toggle("filled", idx < entered.length);
+        });
+      }
+
+      function attemptUnlock() {
+        if (entered === targetCode) {
+          feedback.style.color = "var(--seafoam-dark)";
+          feedback.textContent = "✨ Unlocked! Happy Birthday!";
+          setTimeout(() => {
+            lockScreen.classList.add("unlocked");
+            launchConfetti();
+            chimeOn = true;
+            updateChimeUI();
+            playMusicBoxMelody();
+          }, 260);
+        } else {
+          feedback.style.color = "var(--coral)";
+          feedback.textContent = "Not quite—try your special date again!";
+          lockCard.classList.remove("shake");
+          void lockCard.offsetWidth; // trigger reflow
+          lockCard.classList.add("shake");
+          entered = "";
+          syncDots();
+        }
+      }
+
+      function pushDigit(digit) {
+        if (entered.length >= maxLen) return;
+        entered += digit;
+        feedback.textContent = "";
+        syncDots();
+        if (entered.length === maxLen) {
+          setTimeout(attemptUnlock, 160);
+        }
+      }
+
+      document.querySelectorAll("[data-digit]").forEach((btn) => {
+        btn.addEventListener("click", () => pushDigit(btn.getAttribute("data-digit")));
+      });
+
+      document.getElementById("clearPinBtn").addEventListener("click", () => {
+        entered = entered.slice(0, -1);
+        feedback.textContent = "";
+        syncDots();
+      });
+
+      document.getElementById("submitPinBtn").addEventListener("click", attemptUnlock);
+
+      // Physical keyboard support while lock screen is visible
+      window.addEventListener("keydown", (e) => {
+        if (lockScreen.classList.contains("unlocked")) return;
+        if (e.key >= "0" && e.key <= "9") {
+          pushDigit(e.key);
+        } else if (e.key === "Backspace") {
+          entered = entered.slice(0, -1);
+          syncDots();
+        } else if (e.key === "Enter") {
+          attemptUnlock();
+        }
+      });
+    }
+
+    /* =========================================================================
+       2. INTERACTIVE BIRTHDAY CAKE & MIC BLOW DETECTION
+       ========================================================================= */
+    function initCakeSection() {
+      const blowBtn = document.getElementById("blowCandlesBtn");
+      const micBtn = document.getElementById("micBlowBtn");
+      const relightBtn = document.getElementById("relightBtn");
+      const statusEl = document.getElementById("cakeStatus");
+      let lit = true;
+
+      function blowOut() {
+        if (!lit) return;
+        lit = false;
+        document.querySelectorAll(".flame").forEach((f) => f.classList.add("flame-out"));
+
+        document.querySelectorAll(".smoke-group").forEach((g) => {
+          g.innerHTML = "";
+          for (let i = 0; i < 3; i++) {
+            const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            c.setAttribute("cx", 5 + (i - 1) * 3);
+            c.setAttribute("cy", 4);
+            c.setAttribute("r", 3.5);
+            c.setAttribute("fill", "#94A3B8");
+            c.style.animationDelay = `${i * 0.16}s`;
+            c.classList.add("smoke-puff");
+            g.appendChild(c);
+          }
+        });
+
+        launchConfetti();
+        if (chimeOn) playMusicBoxMelody();
+        statusEl.textContent = `✨ Wish made! May every dream come true this year, ${CONFIG.herName}!`;
+        relightBtn.classList.remove("hidden");
+      }
+
+      blowBtn.addEventListener("click", blowOut);
+
+      relightBtn.addEventListener("click", () => {
+        lit = true;
+        document.querySelectorAll(".flame").forEach((f) => f.classList.remove("flame-out"));
+        document.querySelectorAll(".smoke-group").forEach((g) => (g.innerHTML = ""));
+        statusEl.textContent = "Candles relit—make another wish!";
+        relightBtn.classList.add("hidden");
+      });
+
+      micBtn.addEventListener("click", async () => {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          statusEl.textContent = "Mic isn’t available here—just tap the blow button!";
+          return;
+        }
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const src = ctx.createMediaStreamSource(stream);
+          const analyser = ctx.createAnalyser();
+          analyser.fftSize = 256;
+          src.connect(analyser);
+          const buf = new Uint8Array(analyser.frequencyBinCount);
+
+          statusEl.textContent = "🎙️ Listening... blow gently toward your mic!";
+
+          const listen = () => {
+            if (!lit) {
+              stream.getTracks().forEach((t) => t.stop());
+              return;
+            }
+            analyser.getByteFrequencyData(buf);
+            const avg = buf.reduce((sum, v) => sum + v, 0) / buf.length;
+            if (avg > 46) {
+              blowOut();
+              stream.getTracks().forEach((t) => t.stop());
+            } else {
+              requestAnimationFrame(listen);
+            }
+          };
+          listen();
+        } catch (err) {
+          statusEl.textContent = "Mic permission skipped—tap the button to blow out the candles!";
+        }
+      });
+    }
+
+    function initCinemaMood() {
+      const button = document.getElementById("moodToggleBtn");
+      const title = document.getElementById("moodTitle");
+      const description = document.getElementById("moodDescription");
+
+      button.addEventListener("click", () => {
+        const sunset = document.body.classList.toggle("sunset-cinema");
+        title.textContent = sunset ? "Golden Sunset Cinema" : "Crisp Morning Sky";
+        description.textContent = sunset
+          ? "Amber light, soft film grain, and the city settling slowly."
+          : "Coffee, ocean air, and pale sea-glass light.";
+        button.textContent = sunset
+          ? "🌤️ Switch to Morning Sky"
+          : "🌅 Switch to Golden Sunset";
+      });
+    }
+
+    /* =========================================================================
+       3. WAX-SEALED ENVELOPE: 贝壳的温柔 & 螺髻
+       ========================================================================= */
+    function initShellEnvelope() {
+      const cover = document.getElementById("sealedEnvelopeCover");
+      const letter = document.getElementById("unfoldedShellLetter");
+      const shellBtns = document.querySelectorAll("[data-shell-idx]");
+      const titleEl = document.getElementById("shellCardTitle");
+      const textEl = document.getElementById("shellCardText");
+
+      function selectShell(idx) {
+        const item = CONFIG.shells[idx];
+        if (!item) return;
+        shellBtns.forEach((b) => b.classList.remove("active"));
+        shellBtns[idx].classList.add("active");
+        titleEl.textContent = item.title;
+        textEl.textContent = item.text;
+      }
+
+      selectShell(0);
+
+      const openEnvelope = () => {
+        cover.classList.add("hidden");
+        letter.style.display = "block";
+      };
+
+      cover.addEventListener("click", openEnvelope);
+      cover.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openEnvelope();
+        }
+      });
+
+      shellBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectShell(Number(btn.getAttribute("data-shell-idx")));
+        });
+      });
+    }
+
+    /* =========================================================================
+       4. GLOWING WISH JAR (CONFIG + SHARED STORAGE + LEGACY URL HASH)
+       ========================================================================= */
+    async function initWishJar() {
+      // 1. Load base wishes from CONFIG.FRIENDS_WISHES
+      allWishes = CONFIG.FRIENDS_WISHES.map((w) => ({ ...w }));
+
+      // 2. Merge any previously saved wishes in localStorage
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        if (Array.isArray(saved)) {
+          saved.forEach((item) => {
+            if (item && item.sender && item.message) {
+              const exists = allWishes.some(
+                (w) => w.sender === item.sender && w.message === item.message
+              );
+              if (!exists) allWishes.push(item);
+            }
+          });
+        }
+      } catch (e) {
+        // Ignore storage errors
+      }
+
+      // 3. Parse URL hash if someone opened a shared `#wish=Name|Message` link
+      parseHashWish();
+      window.addEventListener("hashchange", () => {
+        if (parseHashWish()) renderJarOrbs(allWishes.length - 1);
+      });
+
+      renderJarOrbs(0);
+
+      const status = document.getElementById("wishSyncStatus");
+      const setStatus = (message, isError = false) => {
+        status.textContent = message;
+        status.style.color = isError ? "var(--coral-dark)" : "var(--muted)";
+      };
+
+      if (!window.WishService.isConfigured()) {
+        mergeWishes(await window.WishService.fetchWishes());
+        renderJarOrbs(Math.max(allWishes.length - 1, 0));
+        setStatus("Browser mode: wishes are saved on this device until online sharing is set up.");
+
+        window.addEventListener("storage", async (event) => {
+          if (event.key !== "birthday_wishes_local_v1") return;
+          mergeWishes(await window.WishService.fetchWishes());
+          renderJarOrbs(allWishes.length - 1);
+          setStatus("A new wish was added.");
+        });
+
+        if ("BroadcastChannel" in window) {
+          const wishChannel = new BroadcastChannel("birthday-wishes");
+          wishChannel.addEventListener("message", (event) => {
+            if (event.data && event.data.type === "wish-added" && event.data.wish) {
+              mergeWishes([event.data.wish]);
+              renderJarOrbs(allWishes.length - 1);
+              setStatus("A new wish was added.");
+            }
+          });
+        }
+
+        window.setInterval(async () => {
+          const beforeCount = allWishes.length;
+          mergeWishes(await window.WishService.fetchWishes());
+          if (allWishes.length !== beforeCount) renderJarOrbs(allWishes.length - 1);
+        }, 3000);
+      } else {
+        try {
+          mergeWishes(await window.WishService.fetchWishes());
+          renderJarOrbs(Math.max(allWishes.length - 1, 0));
+          setStatus("Online wishes are connected.");
+        } catch (error) {
+          setStatus(`Could not load online wishes: ${error.message}`, true);
+        }
+
+        window.setInterval(async () => {
+          try {
+            const beforeCount = allWishes.length;
+            mergeWishes(await window.WishService.fetchWishes());
+            if (allWishes.length !== beforeCount) renderJarOrbs(allWishes.length - 1);
+            setStatus("Online wishes are connected.");
+          } catch (error) {
+            setStatus(`Could not refresh online wishes: ${error.message}`, true);
+          }
+        }, 30000);
+      }
+
+      // Save wishes to shared storage so they appear for every visitor.
+      const form = document.getElementById("addWishForm");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const author = document.getElementById("wishAuthorInput").value.trim();
+        const text = document.getElementById("wishTextInput").value.trim();
+        if (!author || !text) return;
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        setStatus("Sending your wish...");
+        try {
+          const wish = await window.WishService.submitWish(author, text);
+          mergeWishes([wish]);
+          document.getElementById("wishAuthorInput").value = "";
+          document.getElementById("wishTextInput").value = "";
+          renderJarOrbs(allWishes.length - 1);
+          launchConfetti();
+          setStatus(window.WishService.isConfigured()
+            ? "Your wish was added to the shared jar!"
+            : "Your wish was saved in this browser.");
+        } catch (error) {
+          setStatus(`Your wish could not be submitted: ${error.message}`, true);
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+
+      const linkButton = document.getElementById("copyFriendFormLinkBtn");
+      const copyAgainButton = document.getElementById("copyFriendLinkAgainBtn");
+      const linkPanel = document.getElementById("friendLinkPanel");
+      const linkInput = document.getElementById("friendFormLinkInput");
+      const link = new URL("friend-wish.html", window.location.href).href;
+      linkInput.value = link;
+
+      async function copyFriendLink(button) {
+        let copied = false;
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(link);
+            copied = true;
+          } else {
+            linkInput.hidden = false;
+            linkInput.focus();
+            linkInput.select();
+            copied = document.execCommand("copy");
+          }
+        } catch (error) {
+          copied = false;
+        }
+
+        linkPanel.hidden = false;
+        linkInput.focus();
+        linkInput.select();
+
+        if (copied) {
+          const originalText = button.textContent;
+          button.textContent = button === linkButton ? "✅ Friend form link copied!" : "✅ Copied!";
+          setStatus("Friend wish form link copied.");
+          setTimeout(() => {
+            button.textContent = button === linkButton
+              ? "💌 Copy Friend Wish Form Link"
+              : "Copy";
+          }, 2200);
+        } else {
+          setStatus("The link is selected below. Press Ctrl+C or long-press to copy it.", true);
+          if (button === copyAgainButton) copyAgainButton.textContent = "Select Link";
+        }
+      }
+
+      linkButton.addEventListener("click", () => copyFriendLink(linkButton));
+      copyAgainButton.addEventListener("click", () => copyFriendLink(copyAgainButton));
+      linkInput.addEventListener("click", () => linkInput.select());
+    }
+
+    function mergeWishes(wishes) {
+      wishes.forEach((wish) => {
+        if (!wish || !wish.sender || !wish.message) return;
+        const exists = allWishes.some(
+          (existing) => existing.sender === wish.sender && existing.message === wish.message
+        );
+        if (!exists) allWishes.push({ sender: wish.sender, message: wish.message });
+      });
+    }
+
+    function parseHashWish() {
+      const hash = window.location.hash;
+      if (!hash || !hash.startsWith("#wish=")) return false;
+      try {
+        const raw = decodeURIComponent(hash.slice(6));
+        const sepIdx = raw.indexOf("|");
+        if (sepIdx > 0) {
+          const sender = raw.slice(0, sepIdx).trim();
+          const message = raw.slice(sepIdx + 1).trim();
+          if (sender && message) {
+            addAndPersistWish(sender, message);
+            // Clean hash so reload doesn't duplicate
+            history.replaceState(null, "", window.location.pathname + window.location.search);
+            return true;
+          }
+        }
+      } catch (e) {
+        // Malformed hash ignored
+      }
+      return false;
+    }
+
+    function addAndPersistWish(sender, message) {
+      const exists = allWishes.some((w) => w.sender === sender && w.message === message);
+      if (exists) return;
+      const entry = { sender, message };
+      allWishes.push(entry);
+
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        saved.push(entry);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      } catch (e) {
+        // Ignore storage limits
+      }
+    }
+
+    function renderJarOrbs(activeIndex = 0) {
+      const glass = document.getElementById("wishJarGlass");
+      const counter = document.getElementById("jarCounterText");
+      glass.innerHTML = "";
+
+      const orbThemes = [
+        { bg: "radial-gradient(circle at 35% 35%, #FEF9C3, #F59E0B)", glow: "0 0 16px rgba(245, 158, 11, 0.75)" },
+        { bg: "radial-gradient(circle at 35% 35%, #FFFDF9, #E07A5F)", glow: "0 0 16px rgba(224, 122, 95, 0.7)" },
+        { bg: "radial-gradient(circle at 35% 35%, #ECFDF5, #81B29A)", glow: "0 0 16px rgba(129, 178, 154, 0.75)" },
+        { bg: "radial-gradient(circle at 35% 35%, #FFFBEB, #D4A373)", glow: "0 0 16px rgba(212, 163, 115, 0.75)" }
+      ];
+
+      allWishes.forEach((wish, idx) => {
+        const orb = document.createElement("button");
+        orb.type = "button";
+        orb.className = "wish-orb-btn" + (idx === activeIndex ? " selected" : "");
+        const theme = orbThemes[idx % orbThemes.length];
+        const size = 28 + (idx % 3) * 4;
+
+        // Deterministic organic placement inside the lower two-thirds of the jar
+        const cols = 4;
+        const col = idx % cols;
+        const row = Math.floor(idx / cols);
+        const leftPct = 14 + col * 20 + ((idx * 7) % 8);
+        const bottomPx = 16 + row * 36 + ((idx * 11) % 10);
+
+        orb.style.width = `${size}px`;
+        orb.style.height = `${size}px`;
+        orb.style.left = `${Math.min(leftPct, 78)}%`;
+        orb.style.bottom = `${Math.min(bottomPx, 195)}px`;
+        orb.style.background = theme.bg;
+        orb.style.boxShadow = theme.glow;
+        orb.style.animationDelay = `${(idx % 5) * 0.45}s`;
+        orb.title = `Wish from ${wish.sender}`;
+        orb.setAttribute("aria-label", `Read wish from ${wish.sender}`);
+        orb.textContent = wish.sender.charAt(0).toUpperCase();
+
+        orb.addEventListener("click", () => {
+          document.querySelectorAll(".wish-orb-btn").forEach((el) => el.classList.remove("selected"));
+          orb.classList.add("selected");
+          displayWishCard(idx);
+        });
+
+        glass.appendChild(orb);
+      });
+
+      counter.textContent = `${allWishes.length} glowing ${allWishes.length === 1 ? "wish" : "wishes"} inside`;
+      if (allWishes.length > 0) {
+        displayWishCard(Math.min(activeIndex, allWishes.length - 1));
+      }
+    }
+
+    function displayWishCard(idx) {
+      const wish = allWishes[idx];
+      if (!wish) return;
+      document.getElementById("wishBadge").textContent = `✨ Wish #${idx + 1}`;
+      document.getElementById("wishIndexTag").textContent = `${idx + 1} of ${allWishes.length}`;
+      document.getElementById("wishMessageDisplay").textContent = `“${wish.message}”`;
+      document.getElementById("wishSenderDisplay").textContent = `— ${wish.sender}`;
+    }
+
+  </script>
+</body>
+</html>
