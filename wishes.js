@@ -43,7 +43,6 @@
       ...options,
       headers: {
         apikey: getAnonKey(),
-        Authorization: `Bearer ${getAnonKey()}`,
         "Content-Type": "application/json",
         ...(options && options.headers)
       }
